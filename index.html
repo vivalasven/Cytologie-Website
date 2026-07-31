@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abteilung für Cytologie – Ruhr-Universität Bochum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- RUB Corporate-Design Basisfarben ---- */
+    --rub-blau:      #17365c;
+    --rub-gruen:     #8dae10;
+    --rub-grau:      #e7e7e7;
+
+    /* ---- Material 3 Farbrollen, gemappt auf RUB CD ---- */
+    --md-primary:            var(--rub-blau);
+    --md-on-primary:         #ffffff;
+    --md-primary-container:  #d7e2f0;
+    --md-on-primary-container: #0b2036;
+
+    --md-secondary:           var(--rub-gruen);
+    --md-on-secondary:        #16210a;
+    --md-secondary-container: #e6f0c9;
+    --md-on-secondary-container: #2c3812;
+
+    --md-tertiary:            #4a6b8a;
+    --md-on-tertiary:         #ffffff;
+    --md-tertiary-container:  #dbe6f0;
+    --md-on-tertiary-container: #10222f;
+
+    --md-surface:             #fbfaf7;
+    --md-surface-dim:         #dedbd6;
+    --md-surface-container-lowest: #ffffff;
+    --md-surface-container-low:    #f5f3ee;
+    --md-surface-container:        #efece6;
+    --md-surface-container-high:   #e9e6e0;
+    --md-on-surface:          #1b1c18;
+    --md-on-surface-variant:  #464741;
+    --md-outline:             #767771;
+    --md-outline-variant:     #c6c6bf;
+
+    --md-elev-1: 0 1px 2px rgba(0,0,0,.30), 0 1px 3px 1px rgba(0,0,0,.15);
+    --md-elev-2: 0 1px 2px rgba(0,0,0,.30), 0 2px 6px 2px rgba(0,0,0,.15);
+    --md-elev-3: 0 1px 3px rgba(0,0,0,.30), 0 4px 8px 3px rgba(0,0,0,.15);
+
+    --shape-xs: 4px;
+    --shape-sm: 8px;
+    --shape-md: 12px;
+    --shape-lg: 16px;
+    --shape-xl: 28px;
+    --shape-full: 999px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Roboto Flex","Roboto",system-ui,sans-serif;
+    background:var(--md-surface);
+    color:var(--md-on-surface);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ============ Skip Link / Barrierefreiheit ============ */
+  .skip-link{
+    position:absolute; left:-999px; top:0;
+    background:var(--md-primary); color:var(--md-on-primary);
+    padding:12px 20px; border-radius:0 0 var(--shape-sm) 0; z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  /* ============ Top App Bar (M3) ============ */
+  .topbar{
+    position:sticky; top:0; z-index:100;
+    background:var(--md-surface-container-lowest);
+    border-bottom:1px solid var(--md-outline-variant);
+  }
+  .topbar-inner{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 24px; gap:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:14px;
+  }
+  .brand .mark{
+    width:44px;height:44px;border-radius:var(--shape-md);
+    background:var(--md-primary); color:var(--md-on-primary);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700; font-size:18px; letter-spacing:.5px;
+  }
+  .brand .titles{line-height:1.15;}
+  .brand .titles .uni{font-size:12px; letter-spacing:.04em; color:var(--md-on-surface-variant); text-transform:uppercase;}
+  .brand .titles .dept{font-size:19px; font-weight:600; color:var(--md-primary);}
+
+  .nav-actions{display:flex; align-items:center; gap:8px;}
+  .lang-switch{display:flex; border:1px solid var(--md-outline-variant); border-radius:var(--shape-full); overflow:hidden;}
+  .lang-switch a{padding:6px 12px; font-size:13px; font-weight:500; color:var(--md-on-surface-variant);}
+  .lang-switch a.active{background:var(--md-secondary-container); color:var(--md-on-secondary-container);}
+
+  .menu-toggle{
+    display:none; border:none; background:var(--md-surface-container); color:var(--md-on-surface);
+    width:40px;height:40px;border-radius:var(--shape-full); cursor:pointer; font-size:18px;
+  }
+
+  /* ============ Navigation Rail / Menu ============ */
+  .navbar{background:var(--md-primary);}
+  .navbar-inner{
+    max-width:1200px; margin:0 auto; padding:0 24px;
+    display:flex; align-items:center; gap:2px; flex-wrap:wrap;
+  }
+  .navbar a.nav-item{
+    color:var(--md-on-primary);
+    padding:14px 14px;
+    font-size:13px; font-weight:500; letter-spacing:.03em;
+    text-transform:uppercase;
+    position:relative;
+    display:flex; align-items:center; gap:6px;
+  }
+  .navbar a.nav-item:hover, .navbar a.nav-item:focus-visible{background:rgba(255,255,255,.12);}
+  .has-sub{position:relative;}
+  .submenu{
+    display:none; position:absolute; top:100%; left:0; min-width:260px;
+    background:var(--md-surface-container-lowest); color:var(--md-on-surface);
+    border-radius:0 0 var(--shape-md) var(--shape-md);
+    box-shadow:var(--md-elev-2); padding:8px; z-index:50;
+  }
+  .has-sub:hover .submenu, .has-sub:focus-within .submenu{display:block;}
+  .submenu a{
+    display:block; padding:10px 14px; border-radius:var(--shape-sm);
+    font-size:14px; text-transform:none; font-weight:400; color:var(--md-on-surface);
+  }
+  .submenu a:hover{background:var(--md-secondary-container); color:var(--md-on-secondary-container);}
+
+  /* ============ Hero ============ */
+  .hero{
+    background:
+      linear-gradient(120deg, var(--md-primary-container) 0%, var(--md-surface) 55%);
+    padding:64px 24px 56px;
+  }
+  .hero-inner{
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--md-secondary-container); color:var(--md-on-secondary-container);
+    padding:6px 14px; border-radius:var(--shape-full); font-size:12px; font-weight:600;
+    letter-spacing:.06em; text-transform:uppercase; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(34px,4.2vw,52px); line-height:1.1; margin:0 0 18px;
+    color:var(--md-primary); font-weight:700; letter-spacing:-.01em;
+  }
+  .hero p{
+    font-size:17px; line-height:1.65; color:var(--md-on-surface-variant); margin:0 0 28px; max-width:60ch;
+  }
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 24px; border-radius:var(--shape-full);
+    font-size:14px; font-weight:600; letter-spacing:.02em;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-filled{background:var(--md-primary); color:var(--md-on-primary); box-shadow:var(--md-elev-1);}
+  .btn-filled:hover{box-shadow:var(--md-elev-2); filter:brightness(1.06);}
+  .btn-tonal{background:var(--md-secondary-container); color:var(--md-on-secondary-container);}
+  .btn-tonal:hover{filter:brightness(0.97);}
+  .btn-outline{border-color:var(--md-outline); color:var(--md-primary);}
+  .btn-outline:hover{background:var(--md-primary-container);}
+
+  .hero-art{
+    aspect-ratio:4/3; border-radius:var(--shape-xl);
+    background:
+      radial-gradient(circle at 30% 30%, var(--md-secondary) 0%, transparent 55%),
+      linear-gradient(160deg, var(--rub-blau) 0%, #244a75 100%);
+    box-shadow:var(--md-elev-3);
+    position:relative; overflow:hidden;
+    display:flex; align-items:flex-end; padding:24px;
+  }
+  .hero-art .caption{
+    color:#fff; font-size:13px; background:rgba(0,0,0,.28);
+    padding:8px 14px; border-radius:var(--shape-sm); backdrop-filter:blur(2px);
+  }
+
+  /* ============ Section shell ============ */
+  section.block{max-width:1200px; margin:0 auto; padding:56px 24px;}
+  .section-head{margin-bottom:28px; max-width:70ch;}
+  .section-head .kicker{
+    color:var(--md-secondary); font-weight:700; font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; margin-bottom:8px; display:block;
+  }
+  .section-head h2{font-size:28px; margin:0 0 10px; color:var(--md-primary); font-weight:600;}
+  .section-head p{color:var(--md-on-surface-variant); line-height:1.6; margin:0; font-size:15px;}
+
+  /* ============ Research content (M3 elevated card / list) ============ */
+  .research-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:32px;}
+  .prose{
+    background:var(--md-surface-container-low); border-radius:var(--shape-lg);
+    padding:32px; line-height:1.75; font-size:15.5px; color:var(--md-on-surface);
+  }
+  .prose h3{color:var(--md-primary); font-size:18px; margin:0 0 10px;}
+  .prose p{margin:0 0 16px;}
+  .prose strong{color:var(--md-primary);}
+
+  .areas-card{
+    background:var(--md-surface-container-lowest);
+    border:1px solid var(--md-outline-variant);
+    border-radius:var(--shape-lg); padding:28px; box-shadow:var(--md-elev-1);
+    height:fit-content;
+  }
+  .areas-card h3{margin:0 0 14px; font-size:15px; text-transform:uppercase; letter-spacing:.05em; color:var(--md-on-surface-variant);}
+  .areas-card ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;}
+  .areas-card li a{
+    display:flex; align-items:center; gap:10px;
+    padding:11px 12px; border-radius:var(--shape-sm); font-size:14.5px; font-weight:500;
+  }
+  .areas-card li a:hover{background:var(--md-secondary-container); color:var(--md-on-secondary-container);}
+  .areas-card .dot{width:8px;height:8px;border-radius:50%; background:var(--md-secondary); flex:none;}
+
+  /* ============ CTA Cards (M3 Filled Cards) ============ */
+  .cta-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  }
+  .cta-card{
+    background:var(--md-surface-container-lowest);
+    border:1px solid var(--md-outline-variant);
+    border-radius:var(--shape-lg);
+    padding:24px; display:flex; flex-direction:column; gap:14px;
+    transition:box-shadow .18s ease, transform .18s ease;
+  }
+  .cta-card:hover{box-shadow:var(--md-elev-2); transform:translateY(-2px);}
+  .cta-card .icon{
+    width:48px; height:48px; border-radius:var(--shape-md);
+    background:var(--md-primary-container); color:var(--md-on-primary-container);
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+  }
+  .cta-card h3{margin:0; font-size:17px; color:var(--md-on-surface);}
+  .cta-card p{margin:0; font-size:13.5px; color:var(--md-on-surface-variant); line-height:1.5;}
+  .cta-card .go{margin-top:auto; font-size:13px; font-weight:600; color:var(--md-secondary); display:flex; align-items:center; gap:6px;}
+
+  /* ============ Footer ============ */
+  footer{
+    background:var(--rub-blau); color:#eef2f6; margin-top:40px;
+  }
+  .footer-inner{
+    max-width:1200px; margin:0 auto; padding:48px 24px 24px;
+    display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px;
+  }
+  footer h4{font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:#b9c8da; margin:0 0 14px;}
+  footer .addr{font-size:14px; line-height:1.7; color:#dfe6ee;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  footer a{font-size:14px; color:#dfe6ee;}
+  footer a:hover{color:var(--rub-gruen); text-decoration:underline;}
+  .footer-mark{
+    display:inline-flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .footer-mark .mark{
+    width:38px;height:38px;border-radius:var(--shape-sm); background:var(--rub-gruen); color:#16210a;
+    display:flex;align-items:center;justify-content:center; font-weight:700;
+  }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.15);
+    padding:16px 24px; max-width:1200px; margin:0 auto;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    font-size:12.5px; color:#b9c8da;
+  }
+
+  /* ============ Accessibility bar (angelehnt an Original) ============ */
+  .a11y-bar{
+    background:var(--md-surface-container); border-bottom:1px solid var(--md-outline-variant);
+    font-size:12.5px;
+  }
+  .a11y-inner{
+    max-width:1200px; margin:0 auto; padding:6px 24px;
+    display:flex; justify-content:flex-end; gap:16px; color:var(--md-on-surface-variant);
+  }
+  .a11y-inner button{background:none;border:none;color:inherit;font-size:12.5px;cursor:pointer;padding:2px 4px;}
+  .a11y-inner button:hover{color:var(--md-primary); text-decoration:underline;}
+
+  /* ============ Draft banner ============ */
+  .draft-banner{
+    background:var(--md-tertiary-container); color:var(--md-on-tertiary-container);
+    text-align:center; font-size:13px; padding:8px 16px; font-weight:500;
+  }
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .research-grid{grid-template-columns:1fr;}
+    .cta-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .menu-toggle{display:block;}
+    .navbar-inner{display:none;}
+    .navbar-inner.open{display:flex; flex-direction:column; padding-bottom:12px;}
+    .cta-grid{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr;}
+    .a11y-inner{justify-content:center; flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+<div class="draft-banner">Entwurf — Material&nbsp;3-Redesign im RUB Corporate Design · Struktur &amp; Inhalte unverändert · zur internen Prüfung</div>
+
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<div class="a11y-bar">
+  <div class="a11y-inner">
+    <button type="button">A- A A+</button>
+    <button type="button">Kontrast</button>
+    <button type="button">Leichte Sprache</button>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="mark">RUB</div>
+      <div class="titles">
+        <div class="uni">Ruhr-Universität Bochum</div>
+        <div class="dept">Abteilung für Cytologie</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switch">
+        <a href="#" class="active">DE</a>
+        <a href="#">EN</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menü öffnen" onclick="document.querySelector('.navbar-inner').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<nav class="navbar" aria-label="Hauptnavigation">
+  <div class="navbar-inner">
+    <a class="nav-item" href="#">Prof. Carsten Theiß</a>
+    <a class="nav-item" href="#">Mitarbeiter*innen</a>
+    <a class="nav-item" href="#">Aktuelles</a>
+    <div class="has-sub">
+      <a class="nav-item" href="#" tabindex="0">Forschung ▾</a>
+      <div class="submenu">
+        <a href="#">Strukturelle Plastizität</a>
+        <a href="#">Neurodegeneration</a>
+        <a href="#">Tumorpathologie</a>
+        <a href="#">Phosphatdiabetes</a>
+        <a href="#">Ischämie/Hypoxie</a>
+        <a href="#">Lymphoedem</a>
+        <a href="#">Methoden</a>
+      </div>
+    </div>
+    <a class="nav-item" href="#">Kooperationen</a>
+    <a class="nav-item" href="#">Publikationen</a>
+    <a class="nav-item" href="#">Media</a>
+    <a class="nav-item" href="#">Kontakt</a>
+    <a class="nav-item" href="#" style="margin-left:auto;">Home Anatomie</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Abteilung für Cytologie</span>
+        <h1>Willkommen</h1>
+        <p>
+          … bei der Abteilung für Cytologie der Ruhr-Universität Bochum unter der Leitung von
+          Prof. Dr. Carsten Theiß. Im Mittelpunkt unserer Forschung stehen die Mechanismen des
+          Nervensystems, deren Verständnis essenziell ist, um neurodegenerative Erkrankungen wie
+          Alzheimer und Parkinson besser zu verstehen und zu behandeln.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-filled" href="#forschung">Forschung entdecken</a>
+          <a class="btn btn-outline" href="#kontakt">Kontakt aufnehmen</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <span class="caption">Neurodegenerative Erkrankungen &amp; Zellbiologie</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="forschung">
+    <div class="section-head">
+      <span class="kicker">Forschungsschwerpunkt</span>
+      <h2>Neurodegenerative Erkrankungen und Zellbiologie</h2>
+      <p>Ein Überblick über unsere aktuellen Forschungsarbeiten und die zugrundeliegende Methodik.</p>
+    </div>
+
+    <div class="research-grid">
+      <div class="prose">
+        <h3>Schutzwirkung von Steroidhormonen</h3>
+        <p>
+          Ein Schwerpunkt unserer Arbeit liegt auf den protektiven Eigenschaften von
+          <strong>Steroidhormonen</strong> für das Nervensystem und ihrem möglichen Potenzial in der
+          Behandlung neurodegenerativer Erkrankungen wie Alzheimer und Parkinson sowie der
+          <strong>Amyotrophen Lateralsklerose (ALS)</strong>.
+        </p>
+        <h3>Zellkommunikation bei Brustkrebs</h3>
+        <p>
+          Darüber hinaus untersuchen wir die über <strong>Gap-Junctions</strong> vermittelte
+          Zellkommunikation in hormonrezeptornegativen Brustkrebszellen.
+        </p>
+        <h3>Methodik</h3>
+        <p>
+          Zum Einsatz kommen moderne bildgebende Verfahren – u. a. konfokale Mikroskopie und
+          Transmissionselektronenmikroskopie – kombiniert mit biochemischen Analysemethoden.
+        </p>
+      </div>
+
+      <aside class="areas-card">
+        <h3>Forschungsbereiche</h3>
+        <ul>
+          <li><a href="#"><span class="dot"></span>Strukturelle Plastizität</a></li>
+          <li><a href="#"><span class="dot"></span>Neurodegeneration</a></li>
+          <li><a href="#"><span class="dot"></span>Tumorpathologie</a></li>
+          <li><a href="#"><span class="dot"></span>Phosphatdiabetes</a></li>
+          <li><a href="#"><span class="dot"></span>Ischämie/Hypoxie</a></li>
+          <li><a href="#"><span class="dot"></span>Lymphoedem</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-head">
+      <span class="kicker">Schnellzugriff</span>
+      <h2>Direkt zu den wichtigsten Bereichen</h2>
+    </div>
+    <div class="cta-grid">
+      <a class="cta-card" href="#">
+        <div class="icon">📰</div>
+        <h3>Aktuelles</h3>
+        <p>Neuigkeiten aus der Abteilung für Cytologie.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+      <a class="cta-card" href="#">
+        <div class="icon">🔬</div>
+        <h3>Forschung</h3>
+        <p>Unsere Forschungsschwerpunkte und -bereiche.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+      <a class="cta-card" href="#kontakt">
+        <div class="icon">✉️</div>
+        <h3>Kontakt</h3>
+        <p>So erreichen Sie unser Team.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+      <a class="cta-card" href="#">
+        <div class="icon">🖼️</div>
+        <h3>Media</h3>
+        <p>Poster, Bildmaterial und Präsentationen.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+      <a class="cta-card" href="#">
+        <div class="icon">🤝</div>
+        <h3>Kooperationen</h3>
+        <p>Partnerinstitutionen und gemeinsame Projekte.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+      <a class="cta-card" href="#">
+        <div class="icon">📄</div>
+        <h3>Publikationen</h3>
+        <p>Veröffentlichungen unserer Arbeitsgruppe.</p>
+        <span class="go">Mehr erfahren →</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer id="kontakt">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-mark">
+        <div class="mark">RUB</div>
+        <strong>Ruhr-Universität Bochum</strong>
+      </div>
+      <div class="addr">
+        Abteilung für Cytologie<br>
+        Universitätsstraße 150<br>
+        44801 Bochum
+      </div>
+    </div>
+    <div>
+      <h4>Schnellzugriff</h4>
+      <ul>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Anreise</a></li>
+        <li><a href="#">Hilfe im Notfall</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Weitere Links</h4>
+      <ul>
+        <li><a href="https://www.anatom.ruhr-uni-bochum.de/de/start/">Home Anatomie</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Impressum</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Ruhr-Universität Bochum · Abteilung für Cytologie</span>
+    <span>Entwurf – Material 3 Redesign im RUB Corporate Design</span>
+  </div>
+</footer>
+
+</body>
+</html>
