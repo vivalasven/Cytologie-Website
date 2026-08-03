@@ -1,0 +1,309 @@
+/* ============================================================
+   Cytologie RUB – minimalistisches Redesign
+   Farben & Logo: RUB Corporate Design
+   ============================================================ */
+:root{
+  --rub-blau:   #17365c;
+  --rub-blau-70: #3f5a7c;
+  --rub-gruen:  #8dae10;
+  --rub-grau:   #e7e7e7;
+
+  --ink:        #1b1c18;
+  --ink-soft:   #55564f;
+  --paper:      #ffffff;
+  --hairline:   #dedad0;
+  --hairline-2: #eceae3;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 96px;
+
+  --max: 1040px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Roboto Flex","Roboto",system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--rub-blau); text-decoration:none;}
+a:hover{text-decoration:underline; text-decoration-color:var(--rub-gruen); text-decoration-thickness:2px;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--max); margin:0 auto; padding-left:24px; padding-right:24px;}
+
+.skip-link{
+  position:absolute; left:-999px; top:0;
+  background:var(--rub-blau); color:#fff;
+  padding:10px 18px; z-index:200; font-size:14px;
+}
+.skip-link:focus{left:0;}
+
+/* ---------------- Draft banner ---------------- */
+.draft-banner{
+  background:var(--rub-blau); color:#fff;
+  text-align:center; font-size:12.5px; letter-spacing:.02em;
+  padding:7px 16px;
+}
+
+/* ---------------- Accessibility bar ---------------- */
+.a11y-bar{border-bottom:1px solid var(--hairline-2); font-size:12px;}
+.a11y-inner{
+  max-width:var(--max); margin:0 auto; padding:6px 24px;
+  display:flex; justify-content:flex-end; gap:18px; color:var(--ink-soft);
+}
+.a11y-inner button{background:none;border:none;color:inherit;font-size:12px;cursor:pointer;padding:2px 0;}
+.a11y-inner button:hover{color:var(--rub-blau); text-decoration:underline;}
+
+/* ---------------- Header / RUB Logo ---------------- */
+header.site-header{padding:28px 0 0;}
+.header-row{
+  max-width:var(--max); margin:0 auto; padding:0 24px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  border-bottom:3px solid var(--rub-blau);
+}
+.brand{display:flex; align-items:center; gap:16px;}
+/* Original RUB-Logo (von der Live-Website übernommen), auf blauem Badge freigestellt,
+   da die Originaldatei für helle Hintergründe ausgelegt ist */
+.rub-logo{display:flex; align-items:center;}
+.rub-logo .badge{
+  background:var(--rub-blau); padding:10px 14px; display:flex; align-items:center; flex:none;
+}
+.rub-logo .badge img{height:22px; width:auto; display:block;}
+.dept-name{
+  font-size:15px; color:var(--ink-soft); padding-left:16px; border-left:1px solid var(--hairline);
+}
+
+/* ---------------- Foto-Elemente (von der Live-Website übernommen) ---------------- */
+.staff-photo{
+  width:64px; height:64px; border-radius:50%; object-fit:cover; flex:none;
+  margin-bottom:10px; display:block;
+}
+.staff-card{display:flex; flex-direction:column;}
+.prof-photo{width:100%; border-radius:var(--shape-sm,0); margin-bottom:16px; max-width:260px;}
+.lab-tile img, .media-tile img{width:100%; height:100%; object-fit:cover; display:block;}
+.media-tile{padding:0; overflow:hidden; position:relative;}
+.media-tile .cap{
+  position:absolute; left:0; right:0; bottom:0; background:rgba(23,54,92,.82); color:#fff;
+  font-size:11px; padding:6px 8px; line-height:1.3;
+}
+
+.nav-actions{display:flex; align-items:center; gap:16px;}
+.lang-switch{display:flex; gap:2px; font-size:13px;}
+.lang-switch a{padding:4px 8px; color:var(--ink-soft);}
+.lang-switch a.active{color:var(--rub-blau); font-weight:700; text-decoration:underline; text-decoration-color:var(--rub-gruen);}
+.menu-toggle{
+  display:none; border:1px solid var(--hairline); background:none; color:var(--ink);
+  width:38px;height:38px; cursor:pointer; font-size:16px;
+}
+
+/* ---------------- Nav ---------------- */
+nav.navbar{background:var(--paper);}
+.navbar-inner{
+  max-width:var(--max); margin:0 auto; padding:0 24px;
+  display:flex; align-items:center; gap:0; flex-wrap:wrap;
+}
+.navbar a.nav-item{
+  color:var(--ink); padding:14px 16px 12px; font-size:13.5px; font-weight:500;
+  border-bottom:2px solid transparent; position:relative;
+}
+.navbar a.nav-item:hover{color:var(--rub-blau); text-decoration:none; border-bottom-color:var(--hairline);}
+.navbar a.nav-item.current{color:var(--rub-blau); font-weight:700; border-bottom-color:var(--rub-gruen);}
+.navbar a.nav-item:first-child{padding-left:0;}
+.has-sub{position:relative;}
+.submenu{
+  display:none; position:absolute; top:100%; left:0; min-width:240px;
+  background:var(--paper); border:1px solid var(--hairline);
+  padding:6px 0; z-index:50;
+}
+.has-sub:hover .submenu, .has-sub:focus-within .submenu{display:block;}
+.submenu a{display:block; padding:9px 16px; font-size:13.5px; color:var(--ink);}
+.submenu a:hover{background:var(--hairline-2); text-decoration:none; color:var(--rub-blau);}
+.submenu a.current{color:var(--rub-blau); font-weight:700;}
+.navbar .nav-spacer{margin-left:auto;}
+.navbar .nav-item.external{color:var(--ink-soft); font-size:12.5px;}
+
+/* ---------------- Breadcrumb ---------------- */
+.breadcrumb{max-width:var(--max); margin:0 auto; padding:18px 24px 0; font-size:13px; color:var(--ink-soft);}
+.breadcrumb a:hover{text-decoration:underline;}
+
+/* ---------------- Hero ---------------- */
+.hero{padding:var(--space-5) 0 var(--space-4); border-bottom:1px solid var(--hairline-2);}
+.hero-inner{max-width:var(--max); margin:0 auto; padding:0 24px;}
+.kicker{
+  display:block; color:var(--rub-gruen); font-weight:700; font-size:12px;
+  letter-spacing:.09em; text-transform:uppercase; margin-bottom:14px;
+}
+.hero h1{
+  font-size:clamp(30px,4.2vw,48px); line-height:1.12; margin:0 0 18px;
+  color:var(--rub-blau); font-weight:700; letter-spacing:-.01em; max-width:18ch;
+}
+.hero p.lead{font-size:17px; line-height:1.65; color:var(--ink-soft); margin:0; max-width:62ch;}
+.hero-actions{display:flex; gap:20px; flex-wrap:wrap; margin-top:26px;}
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 4px; font-size:14px; font-weight:600;
+  border-bottom:2px solid var(--rub-blau); color:var(--rub-blau);
+}
+.btn:hover{text-decoration:none; border-bottom-color:var(--rub-gruen);}
+.btn.secondary{color:var(--ink-soft); border-bottom-color:var(--hairline);}
+.btn.secondary:hover{border-bottom-color:var(--rub-blau); color:var(--rub-blau);}
+
+/* ---------------- Sections ---------------- */
+section.block{max-width:var(--max); margin:0 auto; padding:var(--space-5) 24px;}
+section.block.tight{padding-top:var(--space-4); padding-bottom:var(--space-4);}
+.section-head{margin-bottom:32px; max-width:70ch;}
+.section-head h2{font-size:24px; margin:0 0 10px; color:var(--rub-blau); font-weight:700;}
+.section-head p{color:var(--ink-soft); line-height:1.6; margin:0; font-size:15px;}
+
+.research-grid{display:grid; grid-template-columns:1.4fr .6fr; gap:56px;}
+.prose{font-size:15.5px; line-height:1.8; color:var(--ink);}
+.prose h3{color:var(--rub-blau); font-size:18px; margin:30px 0 10px; font-weight:700;}
+.prose h3:first-child{margin-top:0;}
+.prose p{margin:0 0 16px;}
+.prose strong{color:var(--rub-blau);}
+.prose ul{margin:0 0 16px; padding-left:20px;}
+.prose li{margin-bottom:6px;}
+
+.areas-card{border-top:2px solid var(--rub-blau); padding-top:18px; height:fit-content;}
+.areas-card h3{margin:0 0 14px; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
+.areas-card ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+.areas-card li a{
+  display:flex; align-items:center; gap:10px; padding:9px 0; font-size:14.5px; font-weight:500;
+  border-bottom:1px solid var(--hairline-2); color:var(--ink);
+}
+.areas-card li:first-child a{padding-top:0;}
+.areas-card li a:hover, .areas-card li a.current{color:var(--rub-blau); text-decoration:none;}
+.areas-card li a.current{font-weight:700;}
+.areas-card .dot{width:6px;height:6px; border-radius:50%; background:var(--rub-gruen); flex:none;}
+.areas-card p.note{font-size:13px; color:var(--ink-soft); line-height:1.6; margin:16px 0 0;}
+
+/* ---------------- CTA / quick links (minimal list, not cards) ---------------- */
+.cta-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:0; border-top:1px solid var(--hairline); border-left:1px solid var(--hairline);}
+.cta-card{
+  border-right:1px solid var(--hairline); border-bottom:1px solid var(--hairline);
+  padding:28px 26px; display:flex; flex-direction:column; gap:10px; color:var(--ink);
+}
+.cta-card:hover{background:var(--hairline-2); text-decoration:none;}
+.cta-card .tag{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--rub-gruen);}
+.cta-card h3{margin:0; font-size:17px; color:var(--rub-blau); font-weight:700;}
+.cta-card p{margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+.cta-card .go{margin-top:auto; font-size:13px; font-weight:600; color:var(--rub-blau);}
+
+/* ---------------- Staff ---------------- */
+.staff-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hairline);}
+.staff-card{padding:20px 0; border-bottom:1px solid var(--hairline); padding-right:24px;}
+.staff-card h3{margin:0 0 2px; font-size:15.5px; color:var(--ink); font-weight:700;}
+.staff-card .role{font-size:12.5px; color:var(--rub-gruen); font-weight:700; margin-bottom:8px; text-transform:uppercase; letter-spacing:.03em;}
+.staff-card .meta{font-size:13px; color:var(--ink-soft); line-height:1.6;}
+.staff-subhead{font-size:12.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-soft); margin:40px 0 4px;}
+.staff-subhead:first-of-type{margin-top:0;}
+
+/* ---------------- News ---------------- */
+.news-list{display:flex; flex-direction:column;}
+.news-item{
+  display:grid; grid-template-columns:110px 1fr; gap:24px; align-items:start;
+  padding:20px 0; border-bottom:1px solid var(--hairline);
+}
+.news-item .date{font-size:12.5px; font-weight:700; color:var(--rub-blau);}
+.news-item .title{font-size:15px; font-weight:700; color:var(--ink); margin:0 0 4px;}
+.news-item .desc{font-size:14px; color:var(--ink-soft); line-height:1.5; margin:0;}
+
+/* ---------------- Publications ---------------- */
+.pub-year{font-size:17px; font-weight:700; color:var(--rub-blau); margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--rub-blau); display:inline-block;}
+.pub-year:first-child{margin-top:0;}
+.pub-list{list-style:none; margin:0 0 8px; padding:0;}
+.pub-list li{font-size:14px; line-height:1.65; color:var(--ink); padding:10px 0; border-bottom:1px solid var(--hairline-2);}
+.pub-list .authors{font-weight:600;}
+.pub-list .journal{color:var(--ink-soft); font-style:italic;}
+
+/* ---------------- Cooperations ---------------- */
+.coop-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0; border-top:1px solid var(--hairline);}
+.coop-card{padding:20px 24px 20px 0; border-bottom:1px solid var(--hairline);}
+.coop-card:nth-child(even){padding-left:24px;}
+.coop-card h3{margin:0 0 6px; font-size:15px; color:var(--rub-blau); font-weight:700;}
+.coop-card p{margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+
+/* ---------------- Methods ---------------- */
+.method-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--hairline); border-left:1px solid var(--hairline);}
+.method-card{border-right:1px solid var(--hairline); border-bottom:1px solid var(--hairline); padding:26px 20px; text-align:center;}
+.method-card .num{font-size:12px; font-weight:700; color:var(--rub-gruen); margin-bottom:10px; letter-spacing:.06em;}
+.method-card h3{margin:0; font-size:14.5px; color:var(--rub-blau); font-weight:700;}
+
+/* ---------------- Media ---------------- */
+.media-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hairline);}
+.media-tile{
+  aspect-ratio:4/3; background:var(--paper); overflow:hidden; position:relative;
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:10px;
+  font-size:11.5px; color:var(--ink-soft); font-weight:500;
+}
+.media-tile.has-photo{padding:0;}
+.media-tile img{width:100%; height:100%; object-fit:cover; display:block;}
+.media-tile .cap{
+  position:absolute; left:0; right:0; bottom:0; background:rgba(23,54,92,.82); color:#fff;
+  font-size:10.5px; padding:5px 7px; line-height:1.3; text-align:left;
+}
+.poster-list{display:flex; flex-direction:column;}
+.poster-item{
+  display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--hairline); font-size:14px;
+}
+.poster-item .num{font-size:12.5px; font-weight:700; color:var(--rub-blau); flex:none; width:22px;}
+
+/* ---------------- Contact ---------------- */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+.contact-card h3{margin:0 0 16px; color:var(--rub-blau); font-size:16px; font-weight:700;}
+.contact-card .row{display:flex; gap:10px; padding:9px 0; font-size:14.5px; border-bottom:1px solid var(--hairline-2);}
+.contact-card .row:last-child{border-bottom:none;}
+.contact-card .row .lbl{color:var(--ink-soft); min-width:88px; flex:none;}
+.map-placeholder{
+  border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center;
+  color:var(--ink-soft); font-size:13px; min-height:220px;
+}
+
+/* ---------------- Footer ---------------- */
+footer{background:var(--rub-blau); color:#eef2f6; margin-top:var(--space-5);}
+.footer-inner{
+  max-width:var(--max); margin:0 auto; padding:48px 24px 24px;
+  display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px;
+}
+footer h4{font-size:12px; text-transform:uppercase; letter-spacing:.07em; color:#a9bcd1; margin:0 0 14px; font-weight:700;}
+footer .addr{font-size:14px; line-height:1.7; color:#dfe6ee;}
+footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+footer a{font-size:14px; color:#dfe6ee;}
+footer a:hover{color:var(--rub-gruen); text-decoration:underline;}
+.footer-mark{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
+.footer-mark .mark{width:36px;height:36px; background:var(--rub-gruen); display:flex; align-items:center; justify-content:center;}
+.footer-mark .mark span{color:#16210a; font-weight:700; font-size:12px;}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.18);
+  padding:16px 24px; max-width:var(--max); margin:0 auto;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  font-size:12px; color:#a9bcd1;
+}
+
+@media (max-width:900px){
+  .research-grid{grid-template-columns:1fr;}
+  .cta-grid,.staff-grid,.coop-grid{grid-template-columns:repeat(2,1fr);}
+  .method-grid,.media-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  .menu-toggle{display:block;}
+  .navbar-inner{display:none;}
+  .navbar-inner.open{display:flex; flex-direction:column; padding-bottom:12px;}
+  .cta-grid,.staff-grid,.coop-grid,.method-grid,.media-grid{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+  .a11y-inner{justify-content:center; flex-wrap:wrap;}
+  .news-item{grid-template-columns:1fr;}
+  .dept-name{display:none;}
+}
